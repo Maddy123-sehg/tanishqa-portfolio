@@ -220,17 +220,23 @@ const leadership = [
 function LogoBox({
   src,
   alt,
-  className = "h-14 w-24",
+  className = "h-16 w-28",
+  imageClassName = "max-h-full max-w-full",
 }: {
   src: string;
   alt: string;
   className?: string;
+  imageClassName?: string;
 }) {
   return (
     <div
-      className={`flex shrink-0 items-center justify-center rounded-2xl border border-stone-200 bg-white p-3 shadow-sm ${className}`}
+      className={`flex shrink-0 items-center justify-center rounded-2xl border border-stone-200 bg-white p-2 shadow-sm ${className}`}
     >
-      <img src={src} alt={alt} className="max-h-full max-w-full object-contain" />
+      <img
+        src={src}
+        alt={alt}
+        className={`${imageClassName} object-contain`}
+      />
     </div>
   );
 }
@@ -393,7 +399,12 @@ function FeaturedWorkSection() {
                 </p>
 
                 {project.logo && (
-                  <LogoBox src={project.logo} alt={project.title} className="h-14 w-20" />
+                  <LogoBox
+  src={project.logo}
+  alt={project.title}
+  className="h-20 w-32"
+  imageClassName="max-h-20 max-w-32 scale-150"
+/>
                 )}
               </div>
 
@@ -449,7 +460,12 @@ function ExperienceProgramsSection() {
               className="rounded-[2rem] border border-stone-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
             >
               <div className="mb-5 flex items-center justify-between gap-4">
-                <LogoBox src={program.logo} alt={program.org} className="h-16 w-28" />
+                <LogoBox
+  src={program.logo}
+  alt={program.org}
+  className="h-20 w-36"
+  imageClassName="max-h-20 max-w-36 scale-150"
+/>
 
                 <span className="rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-xs font-bold text-stone-600">
                   {program.date}
