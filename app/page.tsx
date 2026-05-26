@@ -220,23 +220,17 @@ const leadership = [
 function LogoBox({
   src,
   alt,
-  className = "h-16 w-28",
-  imageClassName = "max-h-full max-w-full",
+  className = "h-14 w-24",
 }: {
   src: string;
   alt: string;
   className?: string;
-  imageClassName?: string;
 }) {
   return (
     <div
-      className={`flex shrink-0 items-center justify-center rounded-2xl border border-stone-200 bg-white p-2 shadow-sm ${className}`}
+      className={`flex shrink-0 items-center justify-center rounded-2xl border border-stone-200 bg-white p-3 shadow-sm ${className}`}
     >
-      <img
-        src={src}
-        alt={alt}
-        className={`${imageClassName} object-contain`}
-      />
+      <img src={src} alt={alt} className="max-h-full max-w-full object-contain" />
     </div>
   );
 }
@@ -400,11 +394,14 @@ function FeaturedWorkSection() {
 
                 {project.logo && (
                   <LogoBox
-  src={project.logo}
-  alt={project.title}
-  className="h-20 w-32"
-  imageClassName="max-h-20 max-w-32 scale-150"
-/>
+                    src={project.logo}
+                    alt={project.title}
+                    className={
+                      project.title.includes("Quick Commerce")
+                        ? "h-24 w-36 p-1"
+                        : "h-14 w-20"
+                    }
+                  />
                 )}
               </div>
 
@@ -461,11 +458,14 @@ function ExperienceProgramsSection() {
             >
               <div className="mb-5 flex items-center justify-between gap-4">
                 <LogoBox
-  src={program.logo}
-  alt={program.org}
-  className="h-20 w-36"
-  imageClassName="max-h-20 max-w-36 scale-150"
-/>
+                  src={program.logo}
+                  alt={program.org}
+                  className={
+                    program.title.includes("McKinsey")
+                      ? "h-24 w-40 p-1"
+                      : "h-16 w-28"
+                  }
+                />
 
                 <span className="rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-xs font-bold text-stone-600">
                   {program.date}
