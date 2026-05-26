@@ -5,7 +5,6 @@ import {
   BriefcaseBusiness,
   CheckCircle2,
   ExternalLink,
-  FileText,
   GraduationCap,
   Mail,
   MapPin,
@@ -21,6 +20,45 @@ const profile = {
   phone: "+91 84477 14253",
   linkedin: "https://www.linkedin.com/in/tanishqa-sehgal-768233205",
 };
+
+const logoStrip = [
+  {
+    name: "Delhi Technological University",
+    src: "/logos/dtu_logo.png",
+  },
+  {
+    name: "Mount Carmel School",
+    src: "/logos/mcs_logo.png",
+  },
+  {
+    name: "CBSE",
+    src: "/logos/cbse_logo.png",
+  },
+  {
+    name: "BCG X",
+    src: "/logos/bcg_logo.png",
+  },
+  {
+    name: "Goldman Sachs",
+    src: "/logos/goldman_logo.png",
+  },
+  {
+    name: "McKinsey.org Forward",
+    src: "/logos/mck_logo.svg",
+  },
+  {
+    name: "Python",
+    src: "/logos/python_logo.png",
+  },
+  {
+    name: "SQL",
+    src: "/logos/sql_logo.jpg",
+  },
+  {
+    name: "Academic Research",
+    src: "/logos/union_logo.jpg",
+  },
+];
 
 const snapshot = [
   {
@@ -213,14 +251,14 @@ function Header() {
           <a href="#work" className="hover:text-amber-700">
             Work
           </a>
+          <a href="#experience" className="hover:text-amber-700">
+            Experience
+          </a>
           <a href="#projects" className="hover:text-amber-700">
             Projects
           </a>
           <a href="#learning" className="hover:text-amber-700">
-            Learning
-          </a>
-          <a href="#achievements" className="hover:text-amber-700">
-            Achievements
+            Skills
           </a>
           <a href="#contact" className="hover:text-amber-700">
             Contact
@@ -330,6 +368,34 @@ function HeroSection() {
   );
 }
 
+function LogoStripSection() {
+  return (
+    <section className="border-y border-stone-200 bg-white px-6 py-8">
+      <div className="mx-auto max-w-7xl">
+        <p className="mb-6 text-center text-xs font-black uppercase tracking-[0.3em] text-stone-500">
+          Academic, program & skill exposure
+        </p>
+
+        <div className="grid grid-cols-2 items-center gap-4 sm:grid-cols-3 lg:grid-cols-9">
+          {logoStrip.map((logo) => (
+            <div
+              key={logo.name}
+              className="flex h-24 items-center justify-center rounded-2xl border border-stone-200 bg-[#fbfaf6] p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              title={logo.name}
+            >
+              <img
+                src={logo.src}
+                alt={logo.name}
+                className="max-h-12 max-w-full object-contain"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FeaturedWorkSection() {
   return (
     <section id="work" className="bg-white px-6 py-18 md:py-20">
@@ -376,6 +442,48 @@ function FeaturedWorkSection() {
                   </span>
                 ))}
               </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ExperienceProgramsSection() {
+  return (
+    <section id="experience" className="bg-[#fbfaf6] px-6 py-18 md:py-20">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-10 max-w-3xl">
+          <p className="text-xs font-black uppercase tracking-[0.3em] text-amber-700">
+            Virtual Experience Programs
+          </p>
+          <h2 className="mt-3 font-serif text-4xl tracking-tight text-stone-950 md:text-5xl">
+            Early exposure to business, consulting, and data science.
+          </h2>
+          <p className="mt-4 leading-7 text-stone-600">
+            Business-facing programs that show internship readiness across data science,
+            operations, consulting, and structured workplace problem-solving.
+          </p>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-3">
+          {experiencePrograms.map((program) => (
+            <article
+              key={program.title}
+              className="rounded-[2rem] border border-stone-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+            >
+              <div className="mb-5 flex items-center justify-between gap-4">
+                <BriefcaseBusiness className="h-8 w-8 text-amber-700" />
+                <span className="rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-xs font-bold text-stone-600">
+                  {program.date}
+                </span>
+              </div>
+              <h3 className="font-serif text-2xl text-stone-950">{program.title}</h3>
+              <p className="mt-1 text-sm font-semibold text-amber-800">{program.org}</p>
+              <p className="mt-4 text-sm leading-7 text-stone-600">
+                {program.description}
+              </p>
             </article>
           ))}
         </div>
@@ -445,10 +553,10 @@ function LearningSection() {
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto mb-10 max-w-3xl text-center">
           <p className="text-xs font-black uppercase tracking-[0.3em] text-amber-700">
-            Learning Stack
+            Skills & Academic Foundation
           </p>
           <h2 className="mt-3 font-serif text-4xl tracking-tight text-stone-950 md:text-5xl">
-            The academic foundation behind the work.
+            The foundation behind the work.
           </h2>
           <p className="mt-4 leading-7 text-stone-600">
             Coursework and self-driven exposure across economics, statistics,
@@ -500,51 +608,13 @@ function LearningSection() {
   );
 }
 
-function ExperienceProgramsSection() {
-  return (
-    <section className="bg-[#fbfaf6] px-6 py-18 md:py-20">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-10 max-w-3xl">
-          <p className="text-xs font-black uppercase tracking-[0.3em] text-amber-700">
-            Virtual Experience Programs
-          </p>
-          <h2 className="mt-3 font-serif text-4xl tracking-tight text-stone-950 md:text-5xl">
-            Early exposure to business, consulting, and data science.
-          </h2>
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-3">
-          {experiencePrograms.map((program) => (
-            <article
-              key={program.title}
-              className="rounded-[2rem] border border-stone-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
-            >
-              <div className="mb-5 flex items-center justify-between gap-4">
-                <BriefcaseBusiness className="h-8 w-8 text-amber-700" />
-                <span className="rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-xs font-bold text-stone-600">
-                  {program.date}
-                </span>
-              </div>
-              <h3 className="font-serif text-2xl text-stone-950">{program.title}</h3>
-              <p className="mt-1 text-sm font-semibold text-amber-800">{program.org}</p>
-              <p className="mt-4 text-sm leading-7 text-stone-600">
-                {program.description}
-              </p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function AchievementsSection() {
   return (
     <section id="achievements" className="bg-white px-6 py-18 md:py-20">
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.9fr_1.1fr]">
         <div>
           <p className="text-xs font-black uppercase tracking-[0.3em] text-amber-700">
-            Achievements & Leadership
+            Achievements & Education
           </p>
           <h2 className="mt-3 font-serif text-4xl tracking-tight text-stone-950 md:text-5xl">
             Academic initiative beyond the classroom.
@@ -570,7 +640,7 @@ function AchievementsSection() {
             <div className="mt-5 border-t border-stone-200 pt-5 text-sm leading-7 text-stone-600">
               <p>
                 <span className="font-bold text-stone-950">Mount Carmel School:</span>{" "}
-                Class XII Science PCM — 86% · Class X — 95.3%
+                Class XII CBSE Science PCM — 86% · Class X CBSE — 95.3%
               </p>
             </div>
           </div>
@@ -680,10 +750,11 @@ export default function Home() {
     <main className="min-h-screen bg-[#fbfaf6] text-stone-900">
       <Header />
       <HeroSection />
+      <LogoStripSection />
       <FeaturedWorkSection />
+      <ExperienceProgramsSection />
       <ProjectsSection />
       <LearningSection />
-      <ExperienceProgramsSection />
       <AchievementsSection />
       <ContactSection />
     </main>
