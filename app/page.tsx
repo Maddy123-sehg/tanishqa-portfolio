@@ -5,7 +5,6 @@ import {
   BriefcaseBusiness,
   CheckCircle2,
   ExternalLink,
-  GraduationCap,
   Mail,
   MapPin,
   Sparkles,
@@ -21,44 +20,17 @@ const profile = {
   linkedin: "https://www.linkedin.com/in/tanishqa-sehgal-768233205",
 };
 
-const logoStrip = [
-  {
-    name: "Delhi Technological University",
-    src: "/logos/dtu_logo.png",
-  },
-  {
-    name: "Mount Carmel School",
-    src: "/logos/mcs_logo.png",
-  },
-  {
-    name: "CBSE",
-    src: "/logos/cbse_logo.png",
-  },
-  {
-    name: "BCG X",
-    src: "/logos/bcg_logo.png",
-  },
-  {
-    name: "Goldman Sachs",
-    src: "/logos/goldman_logo.png",
-  },
-  {
-    name: "McKinsey.org Forward",
-    src: "/logos/mck_logo.svg",
-  },
-  {
-    name: "Python",
-    src: "/logos/python_logo.png",
-  },
-  {
-    name: "SQL",
-    src: "/logos/sql_logo.jpg",
-  },
-  {
-    name: "Academic Research",
-    src: "/logos/union_logo.jpg",
-  },
-];
+const logos = {
+  dtu: "/logos/dtu_logo.png",
+  mcs: "/logos/mcs_logo.png",
+  cbse: "/logos/cbse_logo.png",
+  bcg: "/logos/bcg_logo.png",
+  goldman: "/logos/goldman_logo.png",
+  mck: "/logos/mck_logo.svg",
+  python: "/logos/python_logo.png",
+  sql: "/logos/sql_logo.jpg",
+  research: "/logos/union_logo.jpg",
+};
 
 const snapshot = [
   {
@@ -83,6 +55,7 @@ const featuredWork = [
   {
     title: "Quick Commerce in India — Published Research",
     eyebrow: "Research · Economics · Consumer Markets",
+    logo: logos.research,
     description:
       "Co-authored published research on India’s ultra-fast delivery ecosystem, studying demand-supply dynamics, gig labour economics, consumer behaviour, digital payments, and the Indian exception in quick commerce.",
     impact:
@@ -92,6 +65,7 @@ const featuredWork = [
   {
     title: "Python Financial Analysis Tool",
     eyebrow: "Python · CSV · Decision Support",
+    logo: logos.python,
     description:
       "Designed a Python-based program to analyse structured financial inputs and generate logical outputs from CSV files for decision support.",
     impact:
@@ -101,6 +75,7 @@ const featuredWork = [
   {
     title: "UK & Eurozone Macroeconomic Slowdown",
     eyebrow: "Macroeconomics · Policy · Global Markets",
+    logo: null,
     description:
       "Analysed the effects of Brexit, inflation, post-pandemic recovery challenges, energy shocks, geopolitical risk, and monetary policy constraints on growth, employment, consumer confidence, and financial markets.",
     impact:
@@ -205,6 +180,7 @@ const experiencePrograms = [
     title: "BCG X Data Science Program",
     org: "Boston Consulting Group · Forage",
     date: "In progress",
+    logo: logos.bcg,
     description:
       "Working on customer churn analysis and retention modelling using real-world business datasets.",
   },
@@ -212,6 +188,7 @@ const experiencePrograms = [
     title: "Goldman Sachs Operations Simulation",
     org: "Goldman Sachs · Forage",
     date: "2025",
+    logo: logos.goldman,
     description:
       "Practised operations workflows and high-value client transaction handling in a structured finance environment.",
   },
@@ -219,6 +196,7 @@ const experiencePrograms = [
     title: "McKinsey.org Forward Program",
     org: "McKinsey.org",
     date: "2024–25",
+    logo: logos.mck,
     description:
       "Selected for a workplace-readiness program focused on professional skills, structured thinking, and business exposure.",
   },
@@ -238,6 +216,24 @@ const leadership = [
   "College badminton team member.",
   "Active participant in Model United Nations, debates, case competitions, and academic events.",
 ];
+
+function LogoBox({
+  src,
+  alt,
+  className = "h-14 w-24",
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`flex shrink-0 items-center justify-center rounded-2xl border border-stone-200 bg-white p-3 shadow-sm ${className}`}
+    >
+      <img src={src} alt={alt} className="max-h-full max-w-full object-contain" />
+    </div>
+  );
+}
 
 function Header() {
   return (
@@ -289,7 +285,7 @@ function HeroSection() {
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white/70 px-4 py-2 text-sm font-semibold text-amber-800 shadow-sm">
             <Sparkles className="h-4 w-4" />
-            Economics · Data Analytics · Research
+            {profile.tagline}
           </div>
 
           <h1 className="mt-7 max-w-5xl font-serif text-5xl leading-[1.03] tracking-tight text-stone-950 md:text-7xl">
@@ -368,34 +364,6 @@ function HeroSection() {
   );
 }
 
-function LogoStripSection() {
-  return (
-    <section className="border-y border-stone-200 bg-white px-6 py-8">
-      <div className="mx-auto max-w-7xl">
-        <p className="mb-6 text-center text-xs font-black uppercase tracking-[0.3em] text-stone-500">
-          Academic, program & skill exposure
-        </p>
-
-        <div className="grid grid-cols-2 items-center gap-4 sm:grid-cols-3 lg:grid-cols-9">
-          {logoStrip.map((logo) => (
-            <div
-              key={logo.name}
-              className="flex h-24 items-center justify-center rounded-2xl border border-stone-200 bg-[#fbfaf6] p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-              title={logo.name}
-            >
-              <img
-                src={logo.src}
-                alt={logo.name}
-                className="max-h-12 max-w-full object-contain"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function FeaturedWorkSection() {
   return (
     <section id="work" className="bg-white px-6 py-18 md:py-20">
@@ -419,10 +387,17 @@ function FeaturedWorkSection() {
               key={project.title}
               className="rounded-[2rem] border border-stone-200 bg-[#fbfaf6] p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
             >
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-amber-700">
-                {project.eyebrow}
-              </p>
-              <h3 className="mt-3 font-serif text-2xl leading-snug text-stone-950">
+              <div className="mb-5 flex items-start justify-between gap-4">
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-amber-700">
+                  {project.eyebrow}
+                </p>
+
+                {project.logo && (
+                  <LogoBox src={project.logo} alt={project.title} className="h-14 w-20" />
+                )}
+              </div>
+
+              <h3 className="font-serif text-2xl leading-snug text-stone-950">
                 {project.title}
               </h3>
               <p className="mt-4 text-sm leading-7 text-stone-600">
@@ -474,11 +449,20 @@ function ExperienceProgramsSection() {
               className="rounded-[2rem] border border-stone-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
             >
               <div className="mb-5 flex items-center justify-between gap-4">
-                <BriefcaseBusiness className="h-8 w-8 text-amber-700" />
+                <LogoBox src={program.logo} alt={program.org} className="h-16 w-28" />
+
                 <span className="rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-xs font-bold text-stone-600">
                   {program.date}
                 </span>
               </div>
+
+              <div className="mb-3 flex items-center gap-2 text-amber-700">
+                <BriefcaseBusiness className="h-5 w-5" />
+                <span className="text-xs font-black uppercase tracking-[0.2em]">
+                  Program
+                </span>
+              </div>
+
               <h3 className="font-serif text-2xl text-stone-950">{program.title}</h3>
               <p className="mt-1 text-sm font-semibold text-amber-800">{program.org}</p>
               <p className="mt-4 text-sm leading-7 text-stone-600">
@@ -570,7 +554,17 @@ function LearningSection() {
               key={group.title}
               className="rounded-[2rem] border border-stone-200 bg-[#fbfaf6] p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
             >
-              <h3 className="font-serif text-2xl text-stone-950">{group.title}</h3>
+              <div className="flex items-start justify-between gap-3">
+                <h3 className="font-serif text-2xl text-stone-950">{group.title}</h3>
+
+                {group.title === "Data & Programming" && (
+                  <div className="flex items-center gap-2">
+                    <LogoBox src={logos.python} alt="Python" className="h-10 w-10 p-1.5" />
+                    <LogoBox src={logos.sql} alt="SQL" className="h-10 w-10 p-1.5" />
+                  </div>
+                )}
+              </div>
+
               <div className="mt-5 flex flex-wrap gap-2">
                 {group.items.map((item) => (
                   <span
@@ -626,7 +620,11 @@ function AchievementsSection() {
 
           <div className="mt-8 rounded-[2rem] border border-stone-200 bg-[#fbfaf6] p-6">
             <div className="flex items-center gap-4">
-              <GraduationCap className="h-10 w-10 text-amber-700" />
+              <LogoBox
+                src={logos.dtu}
+                alt="Delhi Technological University"
+                className="h-16 w-16"
+              />
               <div>
                 <h3 className="font-serif text-2xl text-stone-950">
                   Delhi Technological University
@@ -637,11 +635,28 @@ function AchievementsSection() {
               </div>
             </div>
 
-            <div className="mt-5 border-t border-stone-200 pt-5 text-sm leading-7 text-stone-600">
-              <p>
-                <span className="font-bold text-stone-950">Mount Carmel School:</span>{" "}
-                Class XII CBSE Science PCM — 86% · Class X CBSE — 95.3%
-              </p>
+            <div className="mt-5 border-t border-stone-200 pt-5">
+              <div className="flex items-start gap-4">
+                <LogoBox src={logos.mcs} alt="Mount Carmel School" className="h-16 w-16" />
+
+                <div className="space-y-3 text-sm leading-7 text-stone-600">
+                  <p>
+                    <span className="font-bold text-stone-950">Mount Carmel School</span>
+                  </p>
+
+                  <div className="flex flex-wrap gap-3">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-3 py-2">
+                      <img src={logos.cbse} alt="CBSE" className="h-6 w-6 object-contain" />
+                      Class XII CBSE Science PCM — 86%
+                    </span>
+
+                    <span className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-3 py-2">
+                      <img src={logos.cbse} alt="CBSE" className="h-6 w-6 object-contain" />
+                      Class X CBSE — 95.3%
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -750,7 +765,6 @@ export default function Home() {
     <main className="min-h-screen bg-[#fbfaf6] text-stone-900">
       <Header />
       <HeroSection />
-      <LogoStripSection />
       <FeaturedWorkSection />
       <ExperienceProgramsSection />
       <ProjectsSection />
